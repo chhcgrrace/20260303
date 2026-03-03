@@ -1,6 +1,6 @@
 # 黃喻琦 — Personal Website
 
-A bold, dark editorial personal website featuring elegant typography, a live clock, and premium micro-interactions.
+A bold, dark editorial personal website featuring elegant typography, a live clock, and premium micro-interactions — fully responsive across all devices.
 
 ## ✨ Preview
 
@@ -15,7 +15,8 @@ A bold, dark editorial personal website featuring elegant typography, a live clo
 - **Aesthetic**: Dark editorial, inspired by the Hostinger Stornoway template
 - **Color Palette**: Deep black `#0a0a0a` background with champagne gold `#c9a96e` accents
 - **Typography**: Cormorant Garamond (serif) + Noto Serif TC (中文) + Inter (sans-serif)
-- **Responsive**: Fully adaptive layout for mobile, tablet, and desktop
+- **Grain Texture**: Subtle SVG noise overlay for premium depth
+- **Cursor Glow**: Golden radial glow follows mouse movement (desktop only)
 
 ## 🚀 Features
 
@@ -28,7 +29,25 @@ A bold, dark editorial personal website featuring elegant typography, a live clo
 | 🎞️ Marquee | Infinite scrolling text banner with name and keywords |
 | 🔢 Counter Animation | Stats count up when scrolled into view |
 | 🧭 Active Navigation | Nav links highlight based on current scroll position |
-| 📱 Responsive | Works beautifully across all screen sizes |
+| 🍔 Hamburger Menu | Full-screen mobile menu overlay with animated links |
+
+## 📱 Responsive Web Design (RWD)
+
+Fully responsive with **4 breakpoints** and special handling for touch/landscape devices:
+
+| Breakpoint | Target | Key Adaptations |
+|------------|--------|-----------------|
+| `≤1024px` | Tablet Landscape | Scaled typography, smaller decorations |
+| `≤768px` | Tablet Portrait | Hamburger menu, single-column about layout, cursor glow disabled |
+| `≤480px` | Phone | Compact spacing, full-width CTA button, smaller fonts |
+| `≤360px` | Small Phone | Minimal font sizes for tiny screens |
+
+**Additional RWD features:**
+- 🔄 Landscape phone mode — auto-adjusts hero height, hides scroll indicator
+- 👆 Touch device detection — disables cursor glow, enables `:active` tap states
+- 📱 Notched phone support — `env(safe-area-inset)` for proper edge padding
+- 🍔 Mobile menu — full-screen overlay with staggered animation and live clock
+- 📐 Fluid typography — `clamp()` used throughout for smooth scaling
 
 ## 📁 Project Structure
 
@@ -42,9 +61,9 @@ personal-website/
 
 ## 🛠️ Tech Stack
 
-- **HTML5** — Semantic structure
-- **CSS3** — Custom properties, keyframe animations, grid, flexbox
-- **Vanilla JavaScript** — IntersectionObserver, requestAnimationFrame
+- **HTML5** — Semantic structure with mobile-first markup
+- **CSS3** — Custom properties, keyframe animations, grid, flexbox, media queries
+- **Vanilla JavaScript** — IntersectionObserver, requestAnimationFrame, DOM manipulation
 - **Google Fonts** — Cormorant Garamond, Noto Serif TC, Inter
 
 ## 📖 How to View
