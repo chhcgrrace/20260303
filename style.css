@@ -36,7 +36,9 @@
 /* ============================================
    RESET & BASE
    ============================================ */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -635,6 +637,7 @@ body:hover .cursor-glow {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -642,34 +645,80 @@ body:hover .cursor-glow {
 }
 
 @keyframes slideUp {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
 }
 
 @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0.2; }
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0.2;
+    }
 }
 
 @keyframes scrollPulse {
-    0% { opacity: 1; transform: scaleY(1); transform-origin: top; }
-    50% { opacity: 0.3; transform: scaleY(0.5); transform-origin: top; }
-    100% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+    0% {
+        opacity: 1;
+        transform: scaleY(1);
+        transform-origin: top;
+    }
+
+    50% {
+        opacity: 0.3;
+        transform: scaleY(0.5);
+        transform-origin: top;
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+        transform-origin: top;
+    }
 }
 
 @keyframes rotateSlow {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 @keyframes breathe {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
-    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.5; }
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.5;
+    }
 }
 
 @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 /* Scroll reveal animation */
@@ -685,67 +734,570 @@ body:hover .cursor-glow {
 }
 
 /* ============================================
-   RESPONSIVE
+   HAMBURGER MENU (hidden by default on desktop)
+   ============================================ */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1100;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hamburger-line {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-primary);
+    transition: transform 0.4s var(--ease-out-expo), opacity 0.3s ease;
+    transform-origin: center;
+}
+
+.hamburger.active .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ============================================
+   MOBILE MENU OVERLAY
+   ============================================ */
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    background: rgba(10, 10, 10, 0.97);
+    backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s var(--ease-out-expo), visibility 0.5s;
+}
+
+.mobile-menu.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-menu-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.mobile-link {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    font-weight: 300;
+    color: var(--text-secondary);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    transition: color 0.3s ease, transform 0.4s var(--ease-out-expo);
+    transform: translateY(20px);
+    opacity: 0;
+}
+
+.mobile-menu.active .mobile-link {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.mobile-menu.active .mobile-link:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.mobile-menu.active .mobile-link:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.mobile-menu.active .mobile-link:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.mobile-link:hover,
+.mobile-link:active {
+    color: var(--accent);
+}
+
+.mobile-time {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 0.2em;
+    margin-top: 24px;
+    font-variant-numeric: tabular-nums;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.mobile-menu.active .mobile-time {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease 0.4s, transform 0.5s var(--ease-out-expo) 0.4s;
+}
+
+/* ============================================
+   RESPONSIVE — TABLET LANDSCAPE (≤1024px)
+   ============================================ */
+@media (max-width: 1024px) {
+    :root {
+        --section-padding: clamp(60px, 10vh, 120px);
+        --container-width: min(92vw, 960px);
+    }
+
+    .about-grid {
+        gap: 60px;
+    }
+
+    .about-heading {
+        font-size: clamp(2rem, 4.5vw, 3.5rem);
+    }
+
+    .contact-heading {
+        font-size: clamp(2.5rem, 6vw, 5rem);
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .deco-circle-1 {
+        width: 400px;
+        height: 400px;
+    }
+
+    .deco-circle-2 {
+        width: 580px;
+        height: 580px;
+    }
+}
+
+/* ============================================
+   RESPONSIVE — TABLET PORTRAIT (≤768px)
    ============================================ */
 @media (max-width: 768px) {
+    :root {
+        --section-padding: clamp(48px, 8vh, 100px);
+        --container-width: 90vw;
+    }
+
+    /* Show hamburger, hide desktop nav */
+    .hamburger {
+        display: flex;
+    }
+
     .nav-links {
-        gap: 24px;
+        display: none;
     }
 
     .nav-time {
         display: none;
     }
 
+    .nav {
+        padding: 18px clamp(16px, 4vw, 40px);
+    }
+
+    /* Hero */
+    .hero {
+        min-height: 100svh;
+        padding: 100px 20px 60px;
+    }
+
+    .hero-name {
+        font-size: clamp(3rem, 14vw, 6rem);
+        letter-spacing: 0.05em;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(0.9rem, 3vw, 1.2rem);
+        margin-bottom: 40px;
+        letter-spacing: 0.1em;
+    }
+
+    .hero-eyebrow {
+        margin-bottom: 28px;
+    }
+
+    .eyebrow-text {
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+    }
+
+    .hero-clock {
+        margin-bottom: 40px;
+    }
+
+    .clock-display {
+        font-size: clamp(2rem, 8vw, 3.5rem);
+    }
+
+    .clock-date {
+        font-size: 0.75rem;
+    }
+
+    .scroll-line {
+        height: 40px;
+    }
+
+    /* About */
     .about-grid {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 32px;
     }
 
     .about-heading {
         position: static;
+        font-size: clamp(2rem, 7vw, 3rem);
+        text-align: center;
+    }
+
+    .about-right {
+        text-align: center;
+    }
+
+    .about-text {
+        font-size: 0.95rem;
+        line-height: 1.9;
+    }
+
+    .section-label {
+        margin-bottom: 48px;
     }
 
     .about-stats {
         grid-template-columns: repeat(3, 1fr);
         gap: 16px;
+        margin-top: 40px;
+        padding-top: 28px;
+    }
+
+    .stat-number {
+        font-size: 1.8rem;
+    }
+
+    .stat-label {
+        font-size: 0.6rem;
+    }
+
+    /* Marquee */
+    .marquee-section {
+        padding: 28px 0;
+    }
+
+    .marquee-content {
+        gap: 32px;
+    }
+
+    /* Contact */
+    .contact-content {
+        padding: 0 16px;
+    }
+
+    .contact-heading {
+        font-size: clamp(2.5rem, 10vw, 4rem);
+    }
+
+    .contact-text {
+        font-size: 0.95rem;
+        margin-bottom: 36px;
+    }
+
+    .contact-btn {
+        padding: 16px 40px;
+        font-size: 0.8rem;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 32px 20px;
     }
 
     .footer-content {
         flex-direction: column;
-        gap: 16px;
+        gap: 12px;
         text-align: center;
     }
 
+    /* Decorations */
     .deco-circle-1 {
+        width: 280px;
+        height: 280px;
+    }
+
+    .deco-circle-2 {
+        width: 420px;
+        height: 420px;
+    }
+
+    .deco-circle-3 {
+        width: 200px;
+        height: 200px;
+    }
+
+    /* Disable cursor glow on touch devices */
+    .cursor-glow {
+        display: none;
+    }
+}
+
+/* ============================================
+   RESPONSIVE — PHONE (≤480px)
+   ============================================ */
+@media (max-width: 480px) {
+    :root {
+        --section-padding: clamp(40px, 8vh, 80px);
+        --container-width: 88vw;
+    }
+
+    .nav {
+        padding: 14px 16px;
+    }
+
+    .nav-logo {
+        font-size: 1.2rem;
+    }
+
+    .hero {
+        padding: 80px 16px 48px;
+    }
+
+    .hero-name {
+        font-size: clamp(2.5rem, 16vw, 4.5rem);
+    }
+
+    .hero-subtitle {
+        font-size: 0.85rem;
+        margin-bottom: 32px;
+    }
+
+    .hero-eyebrow {
+        margin-bottom: 20px;
+        gap: 10px;
+    }
+
+    .hero-eyebrow .line {
+        width: 24px;
+    }
+
+    .eyebrow-text {
+        font-size: 0.55rem;
+    }
+
+    .clock-display {
+        font-size: clamp(1.8rem, 10vw, 2.8rem);
+    }
+
+    .clock-label {
+        font-size: 0.55rem;
+        letter-spacing: 0.25em;
+    }
+
+    .clock-date {
+        font-size: 0.7rem;
+    }
+
+    .hero-clock {
+        margin-bottom: 32px;
+    }
+
+    .scroll-indicator {
+        gap: 8px;
+    }
+
+    .scroll-text {
+        font-size: 0.55rem;
+    }
+
+    .scroll-line {
+        height: 32px;
+    }
+
+    /* About */
+    .section-label {
+        margin-bottom: 36px;
+        gap: 14px;
+    }
+
+    .label-number {
+        font-size: 0.8rem;
+    }
+
+    .label-line {
+        width: 36px;
+    }
+
+    .label-text {
+        font-size: 0.7rem;
+    }
+
+    .about-heading {
+        font-size: clamp(1.8rem, 9vw, 2.5rem);
+    }
+
+    .about-text {
+        font-size: 0.88rem;
+        line-height: 1.85;
+        margin-bottom: 20px;
+    }
+
+    .about-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 32px;
+        padding-top: 24px;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.55rem;
+        letter-spacing: 0.1em;
+    }
+
+    /* Contact */
+    .contact-heading {
+        font-size: clamp(2rem, 12vw, 3.5rem);
+    }
+
+    .contact-text {
+        font-size: 0.88rem;
+        margin-bottom: 28px;
+    }
+
+    .contact-btn {
+        padding: 14px 32px;
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Footer */
+    .footer-name {
+        font-size: 0.8rem;
+    }
+
+    .footer-time {
+        font-size: 0.65rem;
+    }
+
+    .footer-copy {
+        font-size: 0.6rem;
+    }
+
+    /* Decorations - smaller on very small screens */
+    .deco-circle-1 {
+        width: 200px;
+        height: 200px;
+    }
+
+    .deco-circle-2 {
         width: 300px;
         height: 300px;
     }
 
-    .deco-circle-2 {
-        width: 450px;
-        height: 450px;
+    .deco-circle-3 {
+        width: 150px;
+        height: 150px;
     }
 }
 
-@media (max-width: 480px) {
-    .nav-links {
-        gap: 16px;
+/* ============================================
+   RESPONSIVE — SMALL PHONE (≤360px)
+   ============================================ */
+@media (max-width: 360px) {
+    .hero-name {
+        font-size: 2.2rem;
+        letter-spacing: 0.03em;
     }
 
-    .nav-link {
-        font-size: 0.7rem;
+    .hero-subtitle {
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
     }
 
+    .clock-display {
+        font-size: 1.6rem;
+    }
+
+    .about-heading {
+        font-size: 1.6rem;
+    }
+
+    .contact-heading {
+        font-size: 1.8rem;
+    }
+
+    .mobile-link {
+        font-size: 1.8rem;
+    }
+}
+
+/* ============================================
+   TOUCH DEVICE & LANDSCAPE HELPERS
+   ============================================ */
+@media (hover: none) {
+    .cursor-glow {
+        display: none;
+    }
+
+    .contact-btn:active {
+        background: var(--accent);
+        color: var(--bg-primary);
+    }
+
+    .nav-link:active {
+        color: var(--text-primary);
+    }
+}
+
+/* Short viewport landscape phone */
+@media (max-height: 500px) and (orientation: landscape) {
     .hero {
-        padding: 100px 20px 60px;
+        min-height: auto;
+        padding: 80px 24px 40px;
     }
 
-    .about-stats {
-        grid-template-columns: 1fr;
-        gap: 24px;
+    .hero-clock {
+        margin-bottom: 20px;
     }
 
-    .contact-btn {
-        padding: 14px 36px;
+    .hero-subtitle {
+        margin-bottom: 20px;
+    }
+
+    .scroll-indicator {
+        display: none;
+    }
+
+    .deco-circle-1,
+    .deco-circle-2 {
+        display: none;
+    }
+}
+
+/* Safe area insets for notched phones */
+@supports (padding: env(safe-area-inset-bottom)) {
+    .nav {
+        padding-left: max(clamp(16px, 4vw, 60px), env(safe-area-inset-left));
+        padding-right: max(clamp(16px, 4vw, 60px), env(safe-area-inset-right));
+    }
+
+    .footer {
+        padding-bottom: max(32px, env(safe-area-inset-bottom));
     }
 }

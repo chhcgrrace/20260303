@@ -119,13 +119,13 @@ updateActiveNav();
 // ─── Counter Animation ────────────────────────
 function animateCounters() {
     const counters = document.querySelectorAll('.stat-number[data-count]');
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const el = entry.target;
                 const target = el.getAttribute('data-count');
-                
+
                 if (target === '∞' || target === '1') {
                     el.textContent = target;
                     return;
@@ -172,6 +172,53 @@ document.querySelectorAll('.nav-link').forEach(link => {
 });
 
 
+// ─── Hamburger Menu Toggle ────────────────────
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Close menu when a mobile link is clicked
+    document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetEl = document.getElementById(targetId);
+
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+
+            if (targetEl) {
+                setTimeout(() => {
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
+            }
+        });
+    });
+}
+
+
+// ─── Mobile Time Update ───────────────────────
+function updateMobileTime() {
+    const mobileTime = document.getElementById('mobileTime');
+    if (mobileTime) {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        mobileTime.textContent = `${hours} : ${minutes} : ${seconds}`;
+    }
+}
+setInterval(updateMobileTime, 1000);
+updateMobileTime();
+
+
 // ─── Parallax on Hero Decorations ─────────────
 let ticking = false;
 
@@ -180,7 +227,7 @@ window.addEventListener('scroll', () => {
         requestAnimationFrame(() => {
             const scrollY = window.scrollY;
             const circles = document.querySelectorAll('.deco-circle');
-            
+
             circles.forEach((circle, i) => {
                 const speed = (i + 1) * 0.05;
                 circle.style.transform = `translate(-50%, calc(-50% + ${scrollY * speed}px))`;
