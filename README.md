@@ -6,11 +6,7 @@ A bold, dark editorial personal website featuring elegant typography, a live clo
 
 ## ✨ Preview
 
-| Hero | About | Contact |
-|------|-------|---------|
-| Large golden gradient name | Two-column layout with stats | "Let's Connect" CTA |
-| Live clock with seconds | Scroll reveal animations | Animated button hover |
-| Decorative parallax circles | Scrolling marquee banner | Footer with live date/time |
+![Homepage Screenshot](./homepage-screenshot.png)
 
 ## 🎨 Design
 
