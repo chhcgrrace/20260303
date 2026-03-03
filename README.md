@@ -1,5 +1,7 @@
 # 黃喻琦 — Personal Website
 
+🔗 **Live Demo**: [https://chhcgrrace.github.io/20260303/](https://chhcgrrace.github.io/20260303/)
+
 A bold, dark editorial personal website featuring elegant typography, a live clock, and premium micro-interactions — fully responsive across all devices.
 
 ## ✨ Preview
