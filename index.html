@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="黃喻琦 — Personal Website">
+    <title>黃喻琦 — Personal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@200;300;400;500;600&family=Noto+Serif+TC:wght@200;300;400;500;600;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Cursor glow effect -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Grain overlay -->
+    <div class="grain-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-logo">YC.</div>
+        <div class="nav-links">
+            <a href="#home" class="nav-link active" data-section="home">首頁</a>
+            <a href="#about" class="nav-link" data-section="about">關於</a>
+            <a href="#contact" class="nav-link" data-section="contact">聯繫</a>
+        </div>
+        <div class="nav-time" id="navTime"></div>
+        <!-- Mobile hamburger -->
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <a href="#home" class="mobile-link" data-section="home">首頁</a>
+            <a href="#about" class="mobile-link" data-section="about">關於</a>
+            <a href="#contact" class="mobile-link" data-section="contact">聯繫</a>
+            <div class="mobile-time" id="mobileTime"></div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <span class="line"></span>
+                <span class="eyebrow-text">Welcome to my world</span>
+            </div>
+            <h1 class="hero-name">
+                <span class="name-line" data-delay="0">
+                    <span class="name-inner">黃喻琦</span>
+                </span>
+            </h1>
+            <p class="hero-subtitle">Creative · Passionate · Unique</p>
+            <div class="hero-clock">
+                <div class="clock-label">Current Time</div>
+                <div class="clock-display" id="heroClock">
+                    <span class="clock-hours" id="clockHours">09</span>
+                    <span class="clock-separator">:</span>
+                    <span class="clock-minutes" id="clockMinutes">36</span>
+                    <span class="clock-separator">:</span>
+                    <span class="clock-seconds" id="clockSeconds">34</span>
+                </div>
+                <div class="clock-date" id="clockDate">2026年3月3日 星期二</div>
+            </div>
+            <div class="scroll-indicator">
+                <span class="scroll-text">Scroll</span>
+                <div class="scroll-line"></div>
+            </div>
+        </div>
+        <div class="hero-decoration">
+            <div class="deco-circle deco-circle-1"></div>
+            <div class="deco-circle deco-circle-2"></div>
+            <div class="deco-circle deco-circle-3"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-container">
+            <div class="section-label">
+                <span class="label-number">01</span>
+                <span class="label-line"></span>
+                <span class="label-text">關於我</span>
+            </div>
+            <div class="about-grid">
+                <div class="about-left">
+                    <h2 class="about-heading">
+                        <span class="heading-line">I am</span>
+                        <span class="heading-line heading-accent">黃喻琦</span>
+                    </h2>
+                </div>
+                <div class="about-right">
+                    <p class="about-text">
+                        歡迎來到我的個人網站。我是一個充滿熱情與創造力的人，相信每一天都是探索與成長的機會。
+                    </p>
+                    <p class="about-text">
+                        這個空間記錄了我的生活、想法與靈感。希望在這裡，你能找到一些共鳴與啟發。
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <span class="stat-number" data-count="∞">∞</span>
+                            <span class="stat-label">Possibilities</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-count="365">0</span>
+                            <span class="stat-label">Days of Growth</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-count="1">1</span>
+                            <span class="stat-label">Unique Me</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Section -->
+    <section class="marquee-section">
+        <div class="marquee">
+            <div class="marquee-content">
+                <span>黃喻琦</span>
+                <span class="marquee-dot">✦</span>
+                <span>Creative</span>
+                <span class="marquee-dot">✦</span>
+                <span>Passionate</span>
+                <span class="marquee-dot">✦</span>
+                <span>Unique</span>
+                <span class="marquee-dot">✦</span>
+                <span>黃喻琦</span>
+                <span class="marquee-dot">✦</span>
+                <span>Creative</span>
+                <span class="marquee-dot">✦</span>
+                <span>Passionate</span>
+                <span class="marquee-dot">✦</span>
+                <span>Unique</span>
+                <span class="marquee-dot">✦</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-container">
+            <div class="section-label">
+                <span class="label-number">02</span>
+                <span class="label-line"></span>
+                <span class="label-text">聯繫</span>
+            </div>
+            <div class="contact-content">
+                <h2 class="contact-heading">
+                    <span class="heading-line">Let's</span>
+                    <span class="heading-line heading-accent">Connect</span>
+                </h2>
+                <p class="contact-text">有任何想法或合作機會，歡迎隨時聯繫我。</p>
+                <a href="mailto:hello@example.com" class="contact-btn">
+                    <span class="btn-text">Say Hello</span>
+                    <span class="btn-arrow">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-name">黃喻琦</div>
+            <div class="footer-time" id="footerTime"></div>
+            <div class="footer-copy">© 2026 All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
